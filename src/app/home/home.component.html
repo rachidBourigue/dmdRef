@@ -1,0 +1,138 @@
+<head>
+  <title>Nouvelle Demande De Référencement SST</title>
+  <style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Ubuntu:wght@300&display=swap');
+
+    * {
+
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .carousel-item {
+      height: 90vh;
+      min-height: 300px;
+    }
+
+    .carousel-caption {
+      bottom: 220px;
+      z-index: 2;
+    }
+
+    .carousel-caption h5 {
+      font-size: 45px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 25px;
+    }
+
+    .carousel-caption p {
+      width: 60%;
+      margin: auto;
+      font-size: 18px;
+      line-height: 1.9;
+    }
+
+    .carousel-caption a {
+      text-transform: uppercase;
+      text-decoration: none;
+      background: #931914;
+      padding: 5px 20px;
+      display: inline-block;
+      color: #fff;
+      margin-top: 15px;
+      border-radius: 5px;
+    }
+
+    .btn-custom-color {
+      background-color: #931914;
+      color: #fff;
+      border-color: #931914;
+      border-radius: 12px;
+
+    }
+
+    .btn-custom-hover:hover {
+      background-color: white;
+      border-color: #931914;
+      border-radius: 12px;
+    }
+
+    .carousel-inner:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1;
+    }
+
+    .texte-personnalise {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .navbar-nav a {
+      font-size: 15px;
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+
+    .navbar-light .navbar-brand {
+      color: #000;
+      font-size: 25px;
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+  </style>
+</head>
+<nav class="navbar navbar-expand-lg navbar-dark bg-light">
+  <div class="container-fluid">
+    <header class="brand-name">
+      <img alt="logo" aria-hidden="true" class="brand-logo" href="#" src="/assets/logo.png">
+    </header>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="carousel slide" data-bs-ride="carousel" id="carouselExampleSlidesOnly">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img alt="..." class="d-block w-100" src="/assets/Image-TGCC.jpg"/>
+      <div class="carousel-caption">
+        <h5 class="animated fadeInDown"
+            style="animation-delay: 1s; font-family: Helvetica, sans-serif;">Bienvenue chez
+          tgcc</h5>
+        <p class="texte-personnalise"
+           style="animation-delay: 1s; font-family: Helvetica, sans-serif;">
+          Nous sommes ravis de vous accueillir sur notre plateforme. Notre site offre aux
+          fournisseurs
+          et aux sous-traitants la possibilité de soumettre des demandes de référencement.
+          Lors de votre demande, vous avez le choix de votre rôle : fournisseur ou sous-traitant.
+        </p><br/>
+        <div class="container text-center">
+          <form role="search">
+            <button (click)="clickSST()" class="btn btn-custom-color mx-2 btn-custom-hover"
+                    type="button">Sous_Traitent
+            </button>
+            <!-- Ajouter un espace horizontal de 2 unités Bootstrap (par exemple, 2 rem) -->
+            <button (click)="clickFOU()" class="btn btn-custom-color mx-2 btn-custom-hover"
+                    type="button">Fournisseur
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DmdReferencement} from "../../controller/model/dmd-referencement";
 import {DmdRefService} from "../../controller/service/dmd-ref.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-dmd-referencement',
@@ -17,7 +18,7 @@ export class DmdReferencementComponent implements OnInit {
   year3input: string;
   currentYear = new Date().getFullYear();
 
-  constructor(private serviceDmd: DmdRefService) {
+  constructor(private serviceDmd: DmdRefService, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -33,6 +34,10 @@ export class DmdReferencementComponent implements OnInit {
 
   }
   save() {
+    this.route.params.subscribe(params => {
+      this.dmdReferencement.typeDmndRef = params['type'];
+      // Use the 'id' parameter as needed
+    });
     console.log(this.dmdReferencement.dateExperationCNSS);
     this.setcaLastYears();
     this.serviceDmd.addDmdRef(this.dmdReferencement).subscribe(
