@@ -1,17 +1,17 @@
-<form #form (ngSubmit)="save()">
-
-
-
+<form #form (ngSubmit)="save()" enctype="multipart/form-data" method="post">
   <div class="accordion" id="accordionExample0">
     <div class="accordion-item">
       <h2 class="accordion-header" id="headingOne">
-        <button class="accordion-button" style="background:#90191c;color:white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <button aria-controls="collapseOne" aria-expanded="true" class="accordion-button"
+                data-bs-target="#collapseOne" data-bs-toggle="collapse" style="background:#90191c;color:white"
+                type="button">
           Demande De Référencement
         </button>
       </h2>
-      <div id="collapseOne0" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div aria-labelledby="headingOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample"
+           id="collapseOne0">
         <div class="accordion-body">
-          <div class="accordion"  id="accordionExample">
+          <div class="accordion" id="accordionExample">
             <div class="accordion-item  m-5">
               <h2 class="accordion-header" >
                 <button class="accordion-button" style="background:#90191c;color:white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -83,13 +83,13 @@
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >Secteur d’activité: (*)</span>
-                          <select class="form-select"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.secteurActivite" >
+                          <select [(ngModel)]="dmdReferencement.secteurActivite" [ngModelOptions]="{standalone: true}"
+                                  class="form-select">
                             <option selected>Select an option</option>
-                            <option value="option1">Option 1</option>
-                            <option value="option2">Option 2</option>
-                            <option value="option3">Option 3</option>
+                            <ng-container *ngFor="let str of listLots">
+                              <option [value]="str">{{ str }}</option>
+                            </ng-container>
                           </select>
-
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >N° T.V.A: (*)</span>
@@ -163,15 +163,30 @@
                     <div class="col-lg-4">
                       <div class="form-group mb-4">
                         <span class="input-group-text pb-2">Dirigeant: (*)</span>
-                        <input type="text" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.dirigeant" >
+                        <input [(ngModel)]="dmdReferencement.dirigeant" [ngModelOptions]="{standalone: true}"
+                               class="form-control"
+                               type="text">
                       </div>
                       <div class="form-group mb-4">
-                        <span class="input-group-text" >Représentant à contacter: (*)</span>
-                        <input type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.representant" >
+                        <span class="input-group-text">Représentant à contacter: (*)</span>
+                        <input [(ngModel)]="dmdReferencement.representant" [ngModelOptions]="{standalone: true}"
+                               class="form-control"
+                               type="text">
                       </div>
                       <div class="form-group mb-4">
-                        <span class="input-group-text" >Fonction de représentant:  (*</span>
-                        <input type="text" class="form-control"    [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.fonction">
+                        <span class="input-group-text">Fonction de représentant:  (*)</span>
+                        <input [(ngModel)]="dmdReferencement.fonction" [ngModelOptions]="{standalone: true}"
+                               class="form-control"
+                               type="text">
+                      </div>
+                      <div class="form-group mb-4">
+                        <span class="input-group-text">Chiffre d'affaire (*): :  (*)</span>
+                        <input [(ngModel)]="year1input" class="form-control" placeholder="{{getFirstKey()}}"
+                               type="text">
+                        <input [(ngModel)]="year2input" class="form-control" placeholder="{{getSecKey()}}"
+                               type="text">
+                        <input [(ngModel)]="year3input" class="form-control" placeholder="{{getTheKey()}}"
+                               type="text">
                       </div>
                     </div>
 
@@ -186,7 +201,9 @@
                       </div>
                       <div class="form-group mb-4">
                         <span class="input-group-text">GSM: (*)</span>
-                        <input type="date" class="p-datepicker"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.gsm">
+                        <input [(ngModel)]="dmdReferencement.direct" [ngModelOptions]="{standalone: true}"
+                               class="form-control"
+                               type="text">
                       </div>
                       <div class="form-group mb-4">
                         <span class="input-group-text" >Effectif de l'entreprise:: (*)</span>
@@ -282,12 +299,6 @@
     </div>
   </div>
 </form>
-<div class="modal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Demande de référencement</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Notre site offre aux fournisseurs et aux sous-traitants la possibilité de soumettre des demandes de référencement. Lors de votre demande, vous choisissez votre rôle : fournisseur ou sous-traitant. Si vous exercez les deux rôles, vous devez soumettre deux demandes distinctes.
+
+
+
