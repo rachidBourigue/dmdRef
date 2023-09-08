@@ -3,9 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   DmdReferencementComponent
 } from "./components/dmd-referencement/dmd-referencement.component";
+import {HomeComponent} from "./home/home.component";
 
 const routes: Routes = [
-  {path:'',component:DmdReferencementComponent},
+  {path:'',component:HomeComponent},
+  {path:'demande',component:DmdReferencementComponent},
 
 ];
 
@@ -13,4 +15,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }

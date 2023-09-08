@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Renderer2} from '@angular/core';
 import {DmdReferencement} from "../../controller/model/dmd-referencement";
 
 @Component({
@@ -12,14 +12,25 @@ export class DmdReferencementComponent implements OnInit {
 
 
 
-  constructor() { }
+
+
+  constructor(private renderer: Renderer2) { }
 
   ngOnInit(): void {
+    this.openModal();
   }
   save(){
     console.log(this.dmdReferencement);
   }
 
+
+  openModal() {
+    const modal = document.getElementById('exampleModal'); // Obtenez l'élément modal par son ID
+    if (modal) {
+      this.renderer.addClass(modal, 'show'); // Ajoutez la classe Bootstrap 'show' pour afficher le modal
+      modal.style.display = 'block'; // Assurez-vous que le modal est affiché
+    }
+  }
   onFileSelected(fileIndex: number, event: any) {
     const selectedFile = event.target.files[0];
 
@@ -28,4 +39,6 @@ export class DmdReferencementComponent implements OnInit {
       console.log(`Selected File ${fileIndex}:`, selectedFile);
     }
   }
+
+
 }
