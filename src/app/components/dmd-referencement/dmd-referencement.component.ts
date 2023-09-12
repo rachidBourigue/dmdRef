@@ -12,17 +12,26 @@ export class DmdReferencementComponent implements OnInit {
   dmdReferencement: DmdReferencement = {};
   selectedFiles: File[] = [];// Initialize with null values for each file input
   listLots: string[] = [];
-  caLastYears: Map<number, string> = new Map<number, string>();
-  year1input: string;
-  year2input: string;
-  year3input: string;
+  year1input: number;
+  year2input: number;
+  year3input: number;
   currentYear = new Date().getFullYear();
+  isValid:boolean=false;
+  isStartSave:boolean=false;
 
   constructor(private serviceDmd: DmdRefService, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.serviceDmd.getAllLots("SST").subscribe(
+    this.route.params.subscribe(params => {
+      this.dmdReferencement.typeDmndRef = params['type'];
+      this. getAllLots(this.dmdReferencement.typeDmndRef);
+    });
+
+  }
+
+  getAllLots(type: string | undefined){
+    this.serviceDmd.getAllLots(type).subscribe(
       value => {
         this.listLots = value;
       },
@@ -30,27 +39,34 @@ export class DmdReferencementComponent implements OnInit {
         console.log("was not send it ", error);
       },
     );
-
-
   }
   save() {
+
+    this.isStartSave=true;
     this.route.params.subscribe(params => {
       this.dmdReferencement.typeDmndRef = params['type'];
       // Use the 'id' parameter as needed
     });
-    console.log(this.dmdReferencement.dateExperationCNSS);
-    this.setcaLastYears();
-    this.serviceDmd.addDmdRef(this.dmdReferencement).subscribe(
-      value => {
-        console.log("was send it ", value);
-        this.addFile(value);
-      },
-      error => {
-        console.log("was not send it ", error);
-      },
-    );
+    /*if(this.isDmdReferencementValid(this.dmdReferencement)){*/
+      console.log(this.dmdReferencement.dateExperationCNSS);
+      console.log(this.year1input);
+      this.setcaLastYears();
+      this.serviceDmd.addDmdRef(this.dmdReferencement).subscribe(
+        value => {
+          console.log("was send it ", value);
+          this.addFile(value);
 
-    console.log(this.dmdReferencement);
+        },
+        error => {
+          console.log("was not send it ", error);
+        },
+      );
+
+      console.log(this.dmdReferencement);
+   /* }else {
+      this.isValid=true;
+    }*/
+
   }
 
   onFileSelected(fileIndex: number, event: any) {
@@ -112,13 +128,66 @@ export class DmdReferencementComponent implements OnInit {
   }
 
   setcaLastYears() {
-    this.caLastYears.set(this.currentYear - 1, this.year1input);
-    this.caLastYears.set(this.currentYear - 1, this.year1input);
-    this.caLastYears.set(this.currentYear - 1, this.year1input);
-    let result = '';
-    for (const [key, value] of this.caLastYears.entries()) {
-      result += `{ ${key} : ${value}\n}`;
+
+    this.dmdReferencement.caLastYears=this.dmdReferencement.caLastYears = "{"
+      + (this.currentYear - 1) + ":" + this.year1input+","
+      + (this.currentYear - 2) + ":" + this.year2input+","
+      + (this.currentYear - 3) + ":" + this.year3input
+      + "}";
+  }
+  isDmdReferencementValid(data: DmdReferencement): boolean {
+    // Check if all required fields are present and not empty
+    if (
+      !data ||
+      !data.raisonSosial ||
+      !data.numDemande ||
+      !data.raisonSociale ||
+      !data.typeDemandeur ||
+      !data.dateCreation ||
+      !data.adresse ||
+      !data.telEntreprise ||
+      !data.faxEntreprise ||
+      !data.emailEntreprise ||
+      !data.formeJuridique ||
+      data.capital === undefined || // Assuming capital can be 0
+      !data.secteurActivite ||
+      !data.dirigeant ||
+      !data.representant ||
+      !data.fonction ||
+      !data.gsm ||
+      !data.faxRepresnetant ||
+      !data.emailRepresentant ||
+      !data.registreCommerce ||
+      !data.identifiantFiscal ||
+      !data.ICE ||
+      !data.patente ||
+      !data.numTva ||
+      !data.numeroCnss ||
+      !data.direct ||
+      data.chiffreAffaire === undefined || // Assuming chiffreAffaire can be 0
+      data.effectif === undefined || // Assuming effectif can be 0
+      !data.validationAssistant ||
+      !data.validationDirecteur ||
+      !data.validationComite ||
+      !data.assistant ||
+      !data.directeur ||
+      !data.avisDirecteur ||
+      !data.avisFinale ||
+      data.sommation_final === undefined || // Assuming sommation_final can be 0
+      data.note_final === undefined || // Assuming note_final can be 0
+      !data.caAnnee ||
+      !data.commentaireFinale ||
+      !data.caLastYears ||
+      !data.typeDmndRef ||
+      !data.dateExperationFiscale ||
+      !data.dateExperationCNSS ||
+      !data.dateExperationChiffreAffaires
+    ) {
+      return false;
     }
-    this.dmdReferencement.caLastYears = result;
+
+    // All fields are present and not empty, so the object is considered valid
+    return true;
   }
 }
+

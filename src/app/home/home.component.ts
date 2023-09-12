@@ -13,15 +13,11 @@ export class HomeComponent {
   }
 
 
-  clickSST() {
+  navigateToDmdRef(type:string) {
 
-    this.router.navigateByUrl('/dmdRef?type=SST');
+    this.router.navigate(['/dmdRef',type]);
 
   }
 
-  clickFOU() {
-    this.type = 'FOU';
-    this.router.navigate(['/dmdRef', this.type]);
-    console.log("Le bouton 'FOU' a été cliqué et type=" + this.type);
-  }
+
 }

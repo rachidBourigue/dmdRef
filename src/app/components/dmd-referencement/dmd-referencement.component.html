@@ -1,4 +1,14 @@
+
 <form #form (ngSubmit)="save()" enctype="multipart/form-data" method="post">
+
+  <ng-container *ngIf="isValid">
+
+    <div  class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>Validation!</strong>
+      S'il vous plaît remplir tous les champs obligatoires. .
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </ng-container>
   <div class="accordion" id="accordionExample0">
     <div class="accordion-item">
       <h2 class="accordion-header" id="headingOne">
@@ -25,61 +35,61 @@
                       <div class="col-lg-4">
                         <div class="form-group mb-4">
                           <span class="input-group-text pb-2" >Raison sociale: (*)</span>
-                          <input  type="text" class="form-control" name="raisonSociale"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.raisonSociale"  >
+                          <input required="true"  type="text" class="form-control" name="raisonSociale"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.raisonSociale"  >
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >Forme juridique: (*)</span>
-                          <input type="text" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.formeJuridique">
+                          <input required="true" type="text" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.formeJuridique">
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >Adresse: (*)</span>
-                          <input type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.adresse">
+                          <input required type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.adresse">
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >ICE: (*)</span>
-                          <input type="text" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.ICE" >
+                          <input required type="text" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.ICE" >
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >TEL: (*)</span>
-                          <input type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.telEntreprise">
+                          <input required type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.telEntreprise">
                         </div>
                       </div>
                       <div class="col-lg-4">
                         <div class="form-group mb-4">
                           <span class="input-group-text pb-2" >Forme Juridique: (*)</span>
-                          <input type="file" class="form-control" (change)="onFileSelected(1, $event)">
+                          <input required type="file" class="form-control" (change)="onFileSelected(1, $event)">
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >FAX: (*)</span>
-                          <input type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.faxEntreprise">
+                          <input required type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.faxEntreprise">
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >Email: (*)</span>
-                          <input type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.emailEntreprise">
+                          <input required type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.emailEntreprise">
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >Attestation de registre de commerce: (*)</span>
-                          <input type="file" class="form-control" (change)="onFileSelected(2, $event)">
+                          <input required type="file" class="form-control" (change)="onFileSelected(2, $event)">
 
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >Date de création: (*)</span>
-                          <input type="date" class="p-datepicker"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.dateCreation" >
+                          <input required type="date" class="p-datepicker"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.dateCreation" >
                         </div>
                       </div>
                       <div class="col-lg-4">
                         <div class="form-group mb-4">
                           <span class="input-group-text pb-2" >Attestation de CNSS: (*)</span>
-                          <input type="file" class="form-control"  (change)="onFileSelected(3, $event)">
+                          <input required type="file" class="form-control"  (change)="onFileSelected(3, $event)">
 
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >Date d'expiration d'attestation CNSS: (*)</span>
-                          <input type="date" class="p-datepicker" [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.dateExperationCNSS" >
+                          <input required type="date" class="p-datepicker" [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.dateExperationCNSS" >
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >Capital: (*)</span>
-                          <input type="text" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.capital" >
+                          <input required type="text" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.capital" >
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >Secteur d’activité: (*)</span>
@@ -146,148 +156,150 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+            <div class="accordion"  id="accordionExample4">
+              <div class="accordion-item  m-5">
+                <h2 class="accordion-header" >
+                  <button class="accordion-button" style="background:#90191c;color:white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne3" aria-expanded="true" aria-controls="collapseOne">
+                    RENSEIGNEMENTS ADMINISTRATIFS
+                  </button>
+                </h2>
+                <div id="collapseOne3" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-lg-4">
+                          <div class="form-group mb-4">
+                            <span class="input-group-text pb-2">Dirigeant: (*)</span>
+                            <input required [(ngModel)]="dmdReferencement.dirigeant" [ngModelOptions]="{standalone: true}"
+                                   class="form-control"
+                                   type="text">
+                          </div>
+                          <div class="form-group mb-4">
+                            <span class="input-group-text">Représentant à contacter: (*)</span>
+                            <input required [(ngModel)]="dmdReferencement.representant" [ngModelOptions]="{standalone: true}"
+                                   class="form-control"
+                                   type="text">
+                          </div>
+                          <div class="form-group mb-4">
+                            <span class="input-group-text">Fonction de représentant:  (*)</span>
+                            <input required [(ngModel)]="dmdReferencement.fonction" [ngModelOptions]="{standalone: true}"
+                                   class="form-control"
+                                   type="text">
+                          </div>
+                          <div class="form-group mb-4">
+                            <span class="input-group-text">Chiffre d'affaire (*):</span>
+                            <input required [(ngModel)]="year1input" [ngModelOptions]="{standalone: true}" class="form-control mb-2" placeholder="{{getFirstKey()}}"
+                                   type="number">
+                            <input required [(ngModel)]="year2input" [ngModelOptions]="{standalone: true}" class="form-control mb-2" placeholder="{{getSecKey()}}"
+                                   type="number">
+                            <input required [(ngModel)]="year3input" [ngModelOptions]="{standalone: true}" class="form-control " placeholder="{{getTheKey()}}"
+                                   type="number">
 
-        <div class="accordion"  id="accordionExample4">
-          <div class="accordion-item  m-5">
-            <h2 class="accordion-header" >
-              <button class="accordion-button" style="background:#90191c;color:white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne3" aria-expanded="true" aria-controls="collapseOne">
-                RENSEIGNEMENTS ADMINISTRATIFS
-              </button>
-            </h2>
-            <div id="collapseOne3" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group mb-4">
-                        <span class="input-group-text pb-2">Dirigeant: (*)</span>
-                        <input [(ngModel)]="dmdReferencement.dirigeant" [ngModelOptions]="{standalone: true}"
-                               class="form-control"
-                               type="text">
-                      </div>
-                      <div class="form-group mb-4">
-                        <span class="input-group-text">Représentant à contacter: (*)</span>
-                        <input [(ngModel)]="dmdReferencement.representant" [ngModelOptions]="{standalone: true}"
-                               class="form-control"
-                               type="text">
-                      </div>
-                      <div class="form-group mb-4">
-                        <span class="input-group-text">Fonction de représentant:  (*)</span>
-                        <input [(ngModel)]="dmdReferencement.fonction" [ngModelOptions]="{standalone: true}"
-                               class="form-control"
-                               type="text">
-                      </div>
-                      <div class="form-group mb-4">
-                        <span class="input-group-text">Chiffre d'affaire (*): :  (*)</span>
-                        <input [(ngModel)]="year1input" class="form-control" placeholder="{{getFirstKey()}}"
-                               type="text">
-                        <input [(ngModel)]="year2input" class="form-control" placeholder="{{getSecKey()}}"
-                               type="text">
-                        <input [(ngModel)]="year3input" class="form-control" placeholder="{{getTheKey()}}"
-                               type="text">
+                          </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                          <div class="form-group mb-4">
+                            <span class="input-group-text pb-2" >Cadre administratif :</span>
+                            <input required type="file" class="form-control" (change)="onFileSelected(6, $event)">
+                          </div>
+                          <div class="form-group mb-4">
+                            <span class="input-group-text" >GSM: (*)</span>
+                            <input required type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.gsm" >
+                          </div>
+                          <div class="form-group mb-4">
+                            <span class="input-group-text">GSM: (*)</span>
+                            <input required [(ngModel)]="dmdReferencement.direct" [ngModelOptions]="{standalone: true}"
+                                   class="form-control"
+                                   type="text">
+                          </div>
+                          <div class="form-group mb-4">
+                            <span class="input-group-text" >Effectif de l'entreprise:: (*)</span>
+                            <input required type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.effectif">
+                          </div>
+                          <div class="form-group mb-4">
+                            <span class="input-group-text" >Attestation de capacité financière:</span>
+                            <input required type="file" class="form-control" (change)="onFileSelected(7, $event)">
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <div class="form-group mb-4">
+                            <span class="input-group-text pb-2" >Attestation de chiffre d'affaire :</span>
+                            <input required type="file" class="form-control"  (change)="onFileSelected(8, $event)">
+                          </div>
+                          <div class="form-group mb-4">
+                            <span class="input-group-text pb-2" >Date d'expiration d'attestation Fiscale: (*)</span>
+                            <input required type="date" class="p-datepicker"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.dateExperationChiffreAffaires">
+                          </div>
+                          <div class="form-group mb-4">
+                            <span class="input-group-text pb-2" >FAX: (*)</span>
+                            <input required type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.faxRepresnetant" >
+                          </div>
+                          <div class="form-group mb-4">
+                            <span class="input-group-text pb-2" >E-mail: (*)</span>
+                            <input required type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.emailRepresentant" >
+                          </div>
+                          <div class="form-group mb-4">
+                            <span class="input-group-text pb-2" >Organigramme :</span>
+                            <input required type="file" class="form-control"  (change)="onFileSelected(9, $event)">
+                          </div>
+                        </div>
+
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion"  id="accordionExample3">
+              <div class="accordion-item  m-5">
+                <h2 class="accordion-header" >
+                  <button class="accordion-button" style="background:#90191c;color:white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne5" aria-expanded="true" aria-controls="collapseOne">
+                    Documents Techniques Justificatifs:
+                  </button>
+                </h2>
+                <div id="collapseOne5" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample3">
+                  <div class="accordion-body">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-lg-4">
+                          <div class="form-group mb-4">
+                            <span class="input-group-text pb-2">Attestation de qualification et classification </span>
+                            <input required type="text" class="form-control"  aria-describedby="basic-addon1" (change)="onFileSelected(10, $event)">
+                          </div>
+                          <div class="form-group mb-4">
+                            <span class="input-group-text" >Catalogue des produits :</span>
+                            <input required type="text" class="form-control"  aria-describedby="basic-addon1">
+                          </div>
+                        </div>
 
-                    <div class="col-lg-4">
-                      <div class="form-group mb-4">
-                        <span class="input-group-text pb-2" >Cadre administratif :</span>
-                        <input type="file" class="form-control" (change)="onFileSelected(6, $event)">
-                      </div>
-                      <div class="form-group mb-4">
-                        <span class="input-group-text" >GSM: (*)</span>
-                        <input type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.gsm" >
-                      </div>
-                      <div class="form-group mb-4">
-                        <span class="input-group-text">GSM: (*)</span>
-                        <input [(ngModel)]="dmdReferencement.direct" [ngModelOptions]="{standalone: true}"
-                               class="form-control"
-                               type="text">
-                      </div>
-                      <div class="form-group mb-4">
-                        <span class="input-group-text" >Effectif de l'entreprise:: (*)</span>
-                        <input type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.effectif">
-                      </div>
-                      <div class="form-group mb-4">
-                        <span class="input-group-text" >Attestation de capacité financière:</span>
-                        <input type="file" class="form-control" (change)="onFileSelected(7, $event)">
+                        <div class="col-lg-4">
+                          <div class="form-group mb-4">
+                            <span class="input-group-text pb-2" >Attestations des travaux exécutés :</span>
+                            <input required type="file" class="form-control" (change)="onFileSelected(12, $event)" >
+                          </div>
+                          <div class="form-group mb-4">
+                            <span class="input-group-text" >Certificats des produits </span>
+                            <input required type="file" class="form-control" (change)="onFileSelected(13, $event)">
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <div class="form-group mb-4">
+                            <span class="input-group-text pb-2" >Moyens techniques :</span>
+                            <input required type="file" class="form-control"  (change)="onFileSelected(14, $event)">
+                          </div>
+                        </div>
+
                       </div>
                     </div>
-                    <div class="col-lg-4">
-                      <div class="form-group mb-4">
-                        <span class="input-group-text pb-2" >Attestation de chiffre d'affaire :</span>
-                        <input type="file" class="form-control"  (change)="onFileSelected(8, $event)">
-                      </div>
-                      <div class="form-group mb-4">
-                        <span class="input-group-text pb-2" >Date d'expiration d'attestation Fiscale: (*)</span>
-                        <input type="date" class="p-datepicker"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.dateExperationChiffreAffaires">
-                      </div>
-                      <div class="form-group mb-4">
-                        <span class="input-group-text pb-2" >FAX: (*)</span>
-                        <input type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.faxRepresnetant" >
-                      </div>
-                      <div class="form-group mb-4">
-                        <span class="input-group-text pb-2" >E-mail: (*)</span>
-                        <input type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.emailRepresentant" >
-                      </div>
-                      <div class="form-group mb-4">
-                        <span class="input-group-text pb-2" >Organigramme :</span>
-                        <input type="file" class="form-control"  (change)="onFileSelected(9, $event)">
-                      </div>
-                    </div>
-
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="accordion"  id="accordionExample3">
-          <div class="accordion-item  m-5">
-            <h2 class="accordion-header" >
-              <button class="accordion-button" style="background:#90191c;color:white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne3" aria-expanded="true" aria-controls="collapseOne">
-                Documents Techniques Justificatifs:
-              </button>
-            </h2>
-            <div id="collapseOne5" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group mb-4">
-                        <span class="input-group-text pb-2">Attestation de qualification et classification </span>
-                        <input type="text" class="form-control"  aria-describedby="basic-addon1" (change)="onFileSelected(10, $event)">
-                      </div>
-                      <div class="form-group mb-4">
-                        <span class="input-group-text" >Catalogue des produits :</span>
-                        <input type="text" class="form-control"  aria-describedby="basic-addon1">
-                      </div>
-                    </div>
 
-                    <div class="col-lg-4">
-                      <div class="form-group mb-4">
-                        <span class="input-group-text pb-2" >Attestations des travaux exécutés :</span>
-                        <input type="file" class="form-control" (change)="onFileSelected(12, $event)" >
-                      </div>
-                      <div class="form-group mb-4">
-                        <span class="input-group-text" >Certificats des produits </span>
-                        <input type="file" class="form-control" (change)="onFileSelected(13, $event)">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group mb-4">
-                        <span class="input-group-text pb-2" >Moyens techniques :</span>
-                        <input type="file" class="form-control"  (change)="onFileSelected(14, $event)">
-                      </div>
-                    </div>
 
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -295,7 +307,10 @@
 
   <div class="container text-center">
     <div class="justify-content-center align-content-center">
-      <button type="submit" class="btn p-2" style="background:#90191c;color:white;">Envoyer</button>
+
+        <button type="submit" class="btn p-2 mb-4" style="background:#90191c;color:white;">Envoyer</button>
+
+
     </div>
   </div>
 </form>

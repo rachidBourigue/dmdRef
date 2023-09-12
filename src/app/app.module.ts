@@ -9,6 +9,7 @@ import {
 } from './components/dmd-referencement/dmd-referencement.component';
 import {ButtonModule} from "primeng/button";
 import {DialogModule} from "primeng/dialog";
+import {ToastModule} from "primeng/toast";
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {DialogModule} from "primeng/dialog";
     HttpClientModule,
     ButtonModule,
     DialogModule,
+    ToastModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
