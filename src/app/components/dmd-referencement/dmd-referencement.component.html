@@ -1,11 +1,11 @@
 
-<form #form (ngSubmit)="save()" enctype="multipart/form-data" method="post">
+<form #form enctype="multipart/form-data" method="post">
 
   <ng-container *ngIf="isValid">
 
     <div  class="alert alert-danger alert-dismissible fade show" role="alert">
       <strong>Validation!</strong>
-      S'il vous plaît remplir tous les champs obligatoires. .
+      S'il vous plaît remplir tous les champs obligatoires.
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   </ng-container>
@@ -22,7 +22,7 @@
            id="collapseOne0">
         <div class="accordion-body">
           <div class="accordion" id="accordionExample">
-            <div class="accordion-item  m-5">
+            <div class="accordion-item  m-3">
               <h2 class="accordion-header" >
                 <button class="accordion-button" style="background:#90191c;color:white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                   RENSEIGNEMENTS DE L'ENTREPRISE
@@ -35,61 +35,76 @@
                       <div class="col-lg-4">
                         <div class="form-group mb-4">
                           <span class="input-group-text pb-2" >Raison sociale: (*)</span>
-                          <input required="true"  type="text" class="form-control" name="raisonSociale"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.raisonSociale"  >
+                          <input [ngClass]="{'borderError' : true}" required="true" type="text" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.raisonSociale">
+                          <small style="color:red;" *ngIf="submitte && !dmdReferencement.raisonSociale">Le champ est obligatoire.</small>
+
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >Forme juridique: (*)</span>
-                          <input required="true" type="text" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.formeJuridique">
+                          <input [ngClass]="{'borderError' : true}" required="true" type="text" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.formeJuridique">
+                          <small style="color:red;" *ngIf="submitte && !dmdReferencement.formeJuridique">Le champ est obligatoire.</small>
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >Adresse: (*)</span>
                           <input required type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.adresse">
+                          <small style="color:red;" *ngIf="submitte && !dmdReferencement.adresse">Le champ est obligatoire.</small>
+
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >ICE: (*)</span>
-                          <input required type="text" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.ICE" >
+                          <input required type="number" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.ICE" >
+                          <small style="color:red;" *ngIf="submitte && !dmdReferencement.ICE">Le champ est obligatoire.</small>
+
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >TEL: (*)</span>
                           <input required type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.telEntreprise">
+                          <small style="color:red;" *ngIf="submitte && !dmdReferencement.telEntreprise">Le champ est obligatoire.</small>
                         </div>
                       </div>
                       <div class="col-lg-4">
                         <div class="form-group mb-4">
                           <span class="input-group-text pb-2" >Forme Juridique: (*)</span>
                           <input required type="file" class="form-control" (change)="onFileSelected(1, $event)">
+                          <small style="color:red;" *ngIf="submitte && !selectedFiles[0]">Le fichier est obligatoire.</small>
+
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >FAX: (*)</span>
                           <input required type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.faxEntreprise">
+                          <small style="color:red;" *ngIf="submitte && !dmdReferencement.faxEntreprise">Le champ est obligatoire.</small>
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >Email: (*)</span>
                           <input required type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.emailEntreprise">
+                          <small style="color:red;" *ngIf="submitte &&!validateEmail!(dmdReferencement.emailEntreprise)">L'email n'est pas valide.</small>
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >Attestation de registre de commerce: (*)</span>
                           <input required type="file" class="form-control" (change)="onFileSelected(2, $event)">
-
+                          <small style="color:red;" *ngIf="submitte && !selectedFiles[1]">Le fichier est obligatoire.</small>
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >Date de création: (*)</span>
                           <input required type="date" class="p-datepicker"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.dateCreation" >
+                          <small style="color:red;" *ngIf="submitte && !dmdReferencement.dateCreation">Le champ est obligatoire.</small>
                         </div>
                       </div>
                       <div class="col-lg-4">
                         <div class="form-group mb-4">
                           <span class="input-group-text pb-2" >Attestation de CNSS: (*)</span>
                           <input required type="file" class="form-control"  (change)="onFileSelected(3, $event)">
-
+                          <small style="color:red;" *ngIf="submitte && !selectedFiles[2]">Le fichier est obligatoire.</small>
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >Date d'expiration d'attestation CNSS: (*)</span>
                           <input required type="date" class="p-datepicker" [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.dateExperationCNSS" >
+                          <small style="color:red;" *ngIf="submitte && !dmdReferencement.dateExperationCNSS">Le champ est obligatoire.</small>
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >Capital: (*)</span>
                           <input required type="text" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.capital" >
+                          <small style="color:red;" *ngIf="submitte && !dmdReferencement.capital">Le champ est obligatoire.</small>
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >Secteur d’activité: (*)</span>
@@ -100,10 +115,13 @@
                               <option [value]="str">{{ str }}</option>
                             </ng-container>
                           </select>
+                          <small style="color:red;" *ngIf="submitte && !dmdReferencement.secteurActivite">Le champ est obligatoire.</small>
+
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >N° T.V.A: (*)</span>
                           <input type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.numTva">
+                          <small style="color:red;" *ngIf="submitte && !dmdReferencement.numTva">Le champ est obligatoire.</small>
                         </div>
                       </div>
 
@@ -113,42 +131,47 @@
                         <div class="form-group mb-4">
                           <span class="input-group-text pb-2" >Registre de commerce (RC): (*)</span>
                           <input type="text" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.registreCommerce">
+                          <small style="color:red;" *ngIf="submitte && !dmdReferencement.registreCommerce">Le champ est obligatoire.</small>
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >IF: (*)</span>
                           <input type="text" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.identifiantFiscal">
+                          <small style="color:red;" *ngIf="submitte && !dmdReferencement.identifiantFiscal">Le champ est obligatoire.</small>
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >N° d’inscription à la CNSS: (*)</span>
                           <input type="text" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.numeroCnss">
+                          <small style="color:red;" *ngIf="submitte && !dmdReferencement.numeroCnss">Le champ est obligatoire.</small>
                         </div>
                       </div>
                       <div class="col-lg-4">
                         <div class="form-group mb-4">
                           <span class="input-group-text pb-2" >Attestation Fiscale: (*)</span>
                           <input type="file" class="form-control" (change)="onFileSelected(4, $event)">
+                          <small style="color:red;" *ngIf="submitte && !selectedFiles[3]">Le fichier est obligatoire.</small>
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >Date d'expiration d'attestation Fiscale: (*)</span>
                           <input type="date" class="p-datepicker"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.dateExperationFiscale">
+                          <small style="color:red;" *ngIf="submitte && !dmdReferencement.dateExperationFiscale">Le champ est obligatoire.</small>
                         </div>
-                        <div class="form-group mb-4">
-                          <span class="input-group-text" >Date de création: (*)</span>
-                          <input type="date" class="p-datepicker"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.dateCreation" >
-                        </div>
+
                       </div>
                       <div class="col-lg-4">
                         <div class="form-group mb-4">
                           <span class="input-group-text pb-2" >Patente : (*)</span>
                           <input type="text" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.patente">
+                          <small style="color:red;" *ngIf="submitte && !dmdReferencement.patente">Le champ est obligatoire.</small>
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text pb-2" >Attestation d'inscription à la taxe professionnelle: (*)</span>
                           <input type="file" class="form-control" (change)="onFileSelected(5, $event)">
+                          <small style="color:red;" *ngIf="submitte && !selectedFiles[4]">Le fichier est obligatoire.</small>
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text pb-2" >Attestation présentation de société: (*)</span>
                           <input type="file" class="form-control" (change)="onFileSelected(6, $event)">
+                          <small style="color:red;" *ngIf="submitte && !selectedFiles[5]">Le fichier est obligatoire.</small>
                         </div>
                       </div>
                     </div>
@@ -157,7 +180,7 @@
               </div>
             </div>
             <div class="accordion"  id="accordionExample4">
-              <div class="accordion-item  m-5">
+              <div class="accordion-item  m-3">
                 <h2 class="accordion-header" >
                   <button class="accordion-button" style="background:#90191c;color:white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne3" aria-expanded="true" aria-controls="collapseOne">
                     RENSEIGNEMENTS ADMINISTRATIFS
@@ -173,27 +196,36 @@
                             <input required [(ngModel)]="dmdReferencement.dirigeant" [ngModelOptions]="{standalone: true}"
                                    class="form-control"
                                    type="text">
+                            <small style="color:red;" *ngIf="submitte && !dmdReferencement.dirigeant">Le champ est obligatoire.</small>
+
                           </div>
                           <div class="form-group mb-4">
                             <span class="input-group-text">Représentant à contacter: (*)</span>
                             <input required [(ngModel)]="dmdReferencement.representant" [ngModelOptions]="{standalone: true}"
                                    class="form-control"
                                    type="text">
+                            <small style="color:red;" *ngIf="submitte && !dmdReferencement.representant">Le champ est obligatoire.</small>
                           </div>
                           <div class="form-group mb-4">
                             <span class="input-group-text">Fonction de représentant:  (*)</span>
                             <input required [(ngModel)]="dmdReferencement.fonction" [ngModelOptions]="{standalone: true}"
                                    class="form-control"
                                    type="text">
+                            <small style="color:red;" *ngIf="submitte && !dmdReferencement.fonction">Le champ est obligatoire.</small>
                           </div>
                           <div class="form-group mb-4">
                             <span class="input-group-text">Chiffre d'affaire (*):</span>
                             <input required [(ngModel)]="year1input" [ngModelOptions]="{standalone: true}" class="form-control mb-2" placeholder="{{getFirstKey()}}"
                                    type="number">
+                            <small style="color:red;" *ngIf="submitte && !year1input">Le champ est obligatoire.</small>
+
                             <input required [(ngModel)]="year2input" [ngModelOptions]="{standalone: true}" class="form-control mb-2" placeholder="{{getSecKey()}}"
                                    type="number">
+                            <small style="color:red;" *ngIf="submitte && !year2input">Le champ est obligatoire.</small>
+
                             <input required [(ngModel)]="year3input" [ngModelOptions]="{standalone: true}" class="form-control " placeholder="{{getTheKey()}}"
                                    type="number">
+                            <small style="color:red;" *ngIf="submitte && !year3input">Le champ est obligatoire.</small>
 
                           </div>
                         </div>
@@ -201,47 +233,59 @@
                         <div class="col-lg-4">
                           <div class="form-group mb-4">
                             <span class="input-group-text pb-2" >Cadre administratif :</span>
-                            <input required type="file" class="form-control" (change)="onFileSelected(6, $event)">
+                            <input required type="file" class="form-control" (change)="onFileSelected(7, $event)">
+                            <small style="color:red;" *ngIf="submitte && !selectedFiles[6]">Le fichier est obligatoire.</small>
                           </div>
                           <div class="form-group mb-4">
                             <span class="input-group-text" >GSM: (*)</span>
-                            <input required type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.gsm" >
+                            <input required type="number" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.gsm" >
+                            <small style="color:red;" *ngIf="submitte && !dmdReferencement.gsm">Le champ est obligatoire.</small>
                           </div>
                           <div class="form-group mb-4">
                             <span class="input-group-text">GSM: (*)</span>
                             <input required [(ngModel)]="dmdReferencement.direct" [ngModelOptions]="{standalone: true}"
                                    class="form-control"
-                                   type="text">
+                                   type="number">
+                            <small style="color:red;" *ngIf="submitte && !dmdReferencement.direct">Le champ est obligatoire.</small>
+
                           </div>
                           <div class="form-group mb-4">
                             <span class="input-group-text" >Effectif de l'entreprise:: (*)</span>
                             <input required type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.effectif">
+                            <small style="color:red;" *ngIf="submitte && !dmdReferencement.effectif">Le champ est obligatoire.</small>
                           </div>
                           <div class="form-group mb-4">
                             <span class="input-group-text" >Attestation de capacité financière:</span>
-                            <input required type="file" class="form-control" (change)="onFileSelected(7, $event)">
+                            <input required type="file" class="form-control" (change)="onFileSelected(8, $event)">
+                            <small style="color:red;" *ngIf="submitte && !selectedFiles[7]">Le fichier est obligatoire.</small>
+
                           </div>
                         </div>
                         <div class="col-lg-4">
                           <div class="form-group mb-4">
                             <span class="input-group-text pb-2" >Attestation de chiffre d'affaire :</span>
-                            <input required type="file" class="form-control"  (change)="onFileSelected(8, $event)">
+                            <input required type="file" class="form-control"  (change)="onFileSelected(9, $event)">
+                            <small style="color:red;" *ngIf="submitte && !selectedFiles[8]">Le fichier est obligatoire.</small>
                           </div>
                           <div class="form-group mb-4">
-                            <span class="input-group-text pb-2" >Date d'expiration d'attestation Fiscale: (*)</span>
+                            <span class="input-group-text pb-2" >Date d'expiration CA: (*)</span>
                             <input required type="date" class="p-datepicker"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.dateExperationChiffreAffaires">
+                            <small style="color:red;" *ngIf="submitte && !dmdReferencement.dateExperationChiffreAffaires">Le champ est obligatoire.</small>
                           </div>
                           <div class="form-group mb-4">
                             <span class="input-group-text pb-2" >FAX: (*)</span>
                             <input required type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.faxRepresnetant" >
+                            <small style="color:red;" *ngIf="submitte && !dmdReferencement.faxRepresnetant">Le champ est obligatoire.</small>
                           </div>
                           <div class="form-group mb-4">
                             <span class="input-group-text pb-2" >E-mail: (*)</span>
                             <input required type="text" class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.emailRepresentant" >
+                            <small style="color:red;" *ngIf="submitte && !validateEmail!(dmdReferencement.emailRepresentant)">L'email n'est pas valide.</small>
                           </div>
                           <div class="form-group mb-4">
                             <span class="input-group-text pb-2" >Organigramme :</span>
-                            <input required type="file" class="form-control"  (change)="onFileSelected(9, $event)">
+                            <input required type="file" class="form-control"  (change)="onFileSelected(10, $event)">
+                            <small style="color:red;" *ngIf="submitte && !selectedFiles[9]">Le fichier est obligatoire.</small>
                           </div>
                         </div>
 
@@ -252,7 +296,7 @@
               </div>
             </div>
             <div class="accordion"  id="accordionExample3">
-              <div class="accordion-item  m-5">
+              <div class="accordion-item  m-3">
                 <h2 class="accordion-header" >
                   <button class="accordion-button" style="background:#90191c;color:white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne5" aria-expanded="true" aria-controls="collapseOne">
                     Documents Techniques Justificatifs:
@@ -265,11 +309,11 @@
                         <div class="col-lg-4">
                           <div class="form-group mb-4">
                             <span class="input-group-text pb-2">Attestation de qualification et classification </span>
-                            <input required type="text" class="form-control"  aria-describedby="basic-addon1" (change)="onFileSelected(10, $event)">
+                            <input required type="file" class="form-control"  aria-describedby="basic-addon1" (change)="onFileSelected(11, $event)">
                           </div>
                           <div class="form-group mb-4">
                             <span class="input-group-text" >Catalogue des produits :</span>
-                            <input required type="text" class="form-control"  aria-describedby="basic-addon1">
+                            <input required type="file" class="form-control"  aria-describedby="basic-addon1">
                           </div>
                         </div>
 
@@ -293,6 +337,11 @@
                       </div>
                     </div>
                   </div>
+
+                </div>
+              </div><div class="container text-center">
+                <div class="justify-content-center align-content-center ">
+                  <button (click)="save()" type="submit" class="btn p-3 mb-4" style="background:#90191c;color:white;">Envoyer la demande</button>
                 </div>
               </div>
             </div>
@@ -302,17 +351,10 @@
 
       </div>
     </div>
+
   </div>
 
 
-  <div class="container text-center">
-    <div class="justify-content-center align-content-center">
-
-        <button type="submit" class="btn p-2 mb-4" style="background:#90191c;color:white;">Envoyer</button>
-
-
-    </div>
-  </div>
 </form>
 
 

@@ -9,7 +9,7 @@ import {FileDmdRef} from "../model/fileddmdref";
   providedIn: 'root'
 })
 export class DmdRefService {
-  baseURL="http://192.168.0.182:8086/";
+  baseURL="http://192.168.0.21:8086/";
   fileDmdRef:FileDmdRef;
   constructor(private http: HttpClient) {
   }

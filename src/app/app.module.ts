@@ -10,21 +10,31 @@ import {
 import {ButtonModule} from "primeng/button";
 import {DialogModule} from "primeng/dialog";
 import {ToastModule} from "primeng/toast";
+import {ChipsModule} from "primeng/chips";
+import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
     AppComponent,
     DmdReferencementComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    ButtonModule,
-    DialogModule,
-    ToastModule,
-  ],
+    imports: [
+      BrowserAnimationsModule,
+      BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        ButtonModule,
+        DialogModule,
+        ToastModule,
+        ChipsModule,
+      ToastrModule.forRoot({
+        timeOut: 3000, // Set the notification timeout
+        positionClass: 'toast-top-right', // Set the position
+        preventDuplicates: true, // Prevent duplicate notifications
+      }),
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

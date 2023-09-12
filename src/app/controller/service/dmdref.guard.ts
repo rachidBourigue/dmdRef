@@ -10,11 +10,8 @@ export class TypeParameterGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const type = route.paramMap.get('type');
 
-    if (type !== "SST") {
-      this.router.navigate(['/']); // Redirect to the home page
-      return false; // Prevent access to the route
-    }
+    return (type == "SST") || (type == "FOU");
 
-    return true; // Allow access to the route
+    // Allow access to the route
   }
 }

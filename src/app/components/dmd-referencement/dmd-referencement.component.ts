@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DmdReferencement} from "../../controller/model/dmd-referencement";
 import {DmdRefService} from "../../controller/service/dmd-ref.service";
 import {ActivatedRoute} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-dmd-referencement',
@@ -18,8 +19,9 @@ export class DmdReferencementComponent implements OnInit {
   currentYear = new Date().getFullYear();
   isValid:boolean=false;
   isStartSave:boolean=false;
+  submitte:boolean=false;
 
-  constructor(private serviceDmd: DmdRefService, private route: ActivatedRoute) {
+  constructor(private serviceDmd: DmdRefService, private route: ActivatedRoute,private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -42,12 +44,13 @@ export class DmdReferencementComponent implements OnInit {
   }
   save() {
 
+   this.submitte=true;
     this.isStartSave=true;
     this.route.params.subscribe(params => {
       this.dmdReferencement.typeDmndRef = params['type'];
       // Use the 'id' parameter as needed
     });
-    /*if(this.isDmdReferencementValid(this.dmdReferencement)){*/
+    if(this.isDmdReferencementValid(this.dmdReferencement)){
       console.log(this.dmdReferencement.dateExperationCNSS);
       console.log(this.year1input);
       this.setcaLastYears();
@@ -55,17 +58,19 @@ export class DmdReferencementComponent implements OnInit {
         value => {
           console.log("was send it ", value);
           this.addFile(value);
-
+          this.showSuccess();
         },
         error => {
           console.log("was not send it ", error);
+
         },
       );
 
       console.log(this.dmdReferencement);
-   /* }else {
+    }else {
+      this.showError();
       this.isValid=true;
-    }*/
+    }
 
   }
 
@@ -106,11 +111,11 @@ export class DmdReferencementComponent implements OnInit {
       } else if (index == 11) {
         this.serviceDmd.uploadFile(this.selectedFiles[11], idDmd, "18", "");
       } else if (index == 12) {
-        this.serviceDmd.uploadFile(this.selectedFiles[11], idDmd, "15", "");
+        this.serviceDmd.uploadFile(this.selectedFiles[12], idDmd, "15", "");
       } else if (index == 13) {
-        this.serviceDmd.uploadFile(this.selectedFiles[11], idDmd, "19", "");
+        this.serviceDmd.uploadFile(this.selectedFiles[13], idDmd, "19", "");
       } else if (index == 14) {
-        this.serviceDmd.uploadFile(this.selectedFiles[11], idDmd, "13", "");
+        this.serviceDmd.uploadFile(this.selectedFiles[14], idDmd, "13", "");
       }
     });
   }
@@ -138,56 +143,85 @@ export class DmdReferencementComponent implements OnInit {
   isDmdReferencementValid(data: DmdReferencement): boolean {
     // Check if all required fields are present and not empty
     if (
-      !data ||
-      !data.raisonSosial ||
-      !data.numDemande ||
       !data.raisonSociale ||
-      !data.typeDemandeur ||
-      !data.dateCreation ||
-      !data.adresse ||
-      !data.telEntreprise ||
-      !data.faxEntreprise ||
-      !data.emailEntreprise ||
       !data.formeJuridique ||
-      data.capital === undefined || // Assuming capital can be 0
-      !data.secteurActivite ||
-      !data.dirigeant ||
-      !data.representant ||
-      !data.fonction ||
-      !data.gsm ||
-      !data.faxRepresnetant ||
-      !data.emailRepresentant ||
-      !data.registreCommerce ||
-      !data.identifiantFiscal ||
+      !data.adresse||
       !data.ICE ||
-      !data.patente ||
-      !data.numTva ||
-      !data.numeroCnss ||
-      !data.direct ||
-      data.chiffreAffaire === undefined || // Assuming chiffreAffaire can be 0
-      data.effectif === undefined || // Assuming effectif can be 0
-      !data.validationAssistant ||
-      !data.validationDirecteur ||
-      !data.validationComite ||
-      !data.assistant ||
-      !data.directeur ||
-      !data.avisDirecteur ||
-      !data.avisFinale ||
-      data.sommation_final === undefined || // Assuming sommation_final can be 0
-      data.note_final === undefined || // Assuming note_final can be 0
-      !data.caAnnee ||
-      !data.commentaireFinale ||
-      !data.caLastYears ||
-      !data.typeDmndRef ||
-      !data.dateExperationFiscale ||
+      !data.telEntreprise||
+      !data.dateCreation||
+      !data.emailEntreprise||
       !data.dateExperationCNSS ||
-      !data.dateExperationChiffreAffaires
+      !data.capital ||
+      !data.secteurActivite ||
+      !data.numTva||
+      !data.registreCommerce||
+      !data.identifiantFiscal||
+      !data.numeroCnss||
+      !data.dateExperationFiscale||
+      !data.patente||
+
+      !data.dirigeant||
+      !data.representant||
+      !data.fonction||
+      !this.year3input||
+      !this.year2input||
+      !this.year1input||
+      !data.gsm ||
+      !data.direct ||
+      !data.effectif ||
+      !data.dateExperationFiscale ||
+      !data.faxRepresnetant ||
+      !data.emailRepresentant
+
+      /*||
+     !data.faxEntreprise ||
+     !data.emailEntreprise ||
+
+     !data.capital || // Assuming capital can be 0
+     !data.secteurActivite ||
+     !data.dirigeant ||
+     !data.representant ||
+     !data.fonction ||
+     !data.gsm ||
+     !data.faxRepresnetant ||
+     !data.emailRepresentant ||
+     !data.registreCommerce ||
+     !data.identifiantFiscal ||
+
+     !data.patente ||
+     !data.numTva ||
+     !data.numeroCnss ||
+     !data.direct ||
+     !data.effectif|| // Assuming effectif can be 0
+     !data.caLastYears ||
+     !data.typeDmndRef ||
+     !data.dateExperationFiscale ||
+     !data.dateExperationCNSS ||
+     !data.dateExperationChiffreAffaires||
+     !this.year3input||
+     !this.year2input||
+     !this.year1input*/
+
     ) {
       return false;
     }
 
     // All fields are present and not empty, so the object is considered valid
     return true;
+  }
+
+  validateEmail(email: any):boolean {
+    // Regular expression for a valid email pattern
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+    // Test the email against the regex pattern
+    return emailRegex.test(email);
+  }
+  showSuccess() {
+    this.toastr.success('votre demande de referencement a été modifié envoyé!', '');
+  }
+  showError() {
+    this.toastr.error('S\'il vous plaît remplir tous les champs obligatoires.!', 'Error de validation');
   }
 }
 
