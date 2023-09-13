@@ -54,35 +54,40 @@ export class DmdReferencementComponent implements OnInit {
       console.log(this.dmdReferencement.dateExperationCNSS);
       console.log(this.year1input);
       this.setcaLastYears();
-      this.serviceDmd.addDmdRef(this.dmdReferencement).subscribe(
-        value => {
-          console.log("was send it ", value);
-          this.addFile(value);
-          this.showSuccess();
-        },
-        error => {
-          console.log("was not send it ", error);
+     this.serviceDmd.addDmdRef(this.dmdReferencement).subscribe(
+       value => {
+         console.log("was send it ", value);
+         this.addFile(value);
+         this.showSuccess();
+       },
+       error => {
+         console.log("was not send it ", error);
 
-        },
-      );
+       },
+     );
 
       console.log(this.dmdReferencement);
-    }else {
+    } else {
       this.showError();
-      this.isValid=true;
+      this.isValid = true;
     }
 
   }
 
+  isPdf(file: any): boolean {
+    return !!file && file.name.toLowerCase().endsWith('.pdf');
+  }
+
   onFileSelected(fileIndex: number, event: any) {
     const selectedFile = event.target.files[0];
+
+    console.log();
     if (selectedFile) {
       this.selectedFiles[fileIndex - 1] = selectedFile;
       console.log(this.selectedFiles[fileIndex - 1].name);
       //this.serviceDmd.uploadFile(selectedFile,"85","2","02/02/2022")
     }
   }
-
 
   addFile(idDmd: any) {
     this.selectedFiles.forEach((value, index) => {
@@ -91,7 +96,7 @@ export class DmdReferencementComponent implements OnInit {
       } else if (index == 1) {
         this.serviceDmd.uploadFile(this.selectedFiles[1], idDmd, "9", "");
       } else if (index == 2) {
-        this.serviceDmd.uploadFile(this.selectedFiles[2], idDmd, "10", this.dmdReferencement.dateExperationCNSS);
+        this.serviceDmd.uploadFile(this.selectedFiles[2], idDmd, "6", this.dmdReferencement.dateExperationCNSS);
       } else if (index == 3) {
         this.serviceDmd.uploadFile(this.selectedFiles[3], idDmd, "8", this.dmdReferencement.dateExperationFiscale);
       } else if (index == 4) {
@@ -142,11 +147,12 @@ export class DmdReferencementComponent implements OnInit {
   }
   isDmdReferencementValid(data: DmdReferencement): boolean {
     // Check if all required fields are present and not empty
+
     if (
       !data.raisonSociale ||
       !data.formeJuridique ||
-      !data.adresse||
-      !data.ICE ||
+      !data.adresse ||
+      !data.ice ||
       !data.telEntreprise||
       !data.dateCreation||
       !data.emailEntreprise||
@@ -161,46 +167,30 @@ export class DmdReferencementComponent implements OnInit {
       !data.patente||
 
       !data.dirigeant||
-      !data.representant||
-      !data.fonction||
-      !this.year3input||
-      !this.year2input||
-      !this.year1input||
+      !data.representant ||
+      !data.fonction ||
+      !this.year3input ||
+      !this.year2input ||
+      !this.year1input ||
       !data.gsm ||
       !data.direct ||
       !data.effectif ||
       !data.dateExperationFiscale ||
       !data.faxRepresnetant ||
-      !data.emailRepresentant
+      !data.emailRepresentant ||
+      !this.selectedFiles[0] ||
+      !this.selectedFiles[2] ||
+      !this.selectedFiles[3] ||
+      !this.selectedFiles[11] ||
+      !this.selectedFiles[1] ||
+      !this.selectedFiles[5] ||
+      !this.isPdf(this.selectedFiles[0]) ||
+      !this.isPdf(this.selectedFiles[2]) ||
+      !this.isPdf(this.selectedFiles[3]) ||
+      !this.isPdf(this.selectedFiles[11]) ||
+      !this.isPdf(this.selectedFiles[1]) ||
+      !this.isPdf(this.selectedFiles[5])
 
-      /*||
-     !data.faxEntreprise ||
-     !data.emailEntreprise ||
-
-     !data.capital || // Assuming capital can be 0
-     !data.secteurActivite ||
-     !data.dirigeant ||
-     !data.representant ||
-     !data.fonction ||
-     !data.gsm ||
-     !data.faxRepresnetant ||
-     !data.emailRepresentant ||
-     !data.registreCommerce ||
-     !data.identifiantFiscal ||
-
-     !data.patente ||
-     !data.numTva ||
-     !data.numeroCnss ||
-     !data.direct ||
-     !data.effectif|| // Assuming effectif can be 0
-     !data.caLastYears ||
-     !data.typeDmndRef ||
-     !data.dateExperationFiscale ||
-     !data.dateExperationCNSS ||
-     !data.dateExperationChiffreAffaires||
-     !this.year3input||
-     !this.year2input||
-     !this.year1input*/
 
     ) {
       return false;

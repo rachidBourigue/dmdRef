@@ -20,7 +20,7 @@ export interface DmdReferencement {
   emailRepresentant?: string;
   registreCommerce?: string;
   identifiantFiscal?: string;
-  ICE?: string;
+  ice?: string;
   patente?: string;
   numTva?: string;
   numeroCnss?: string;

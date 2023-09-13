@@ -3,11 +3,11 @@
 
   <ng-container *ngIf="isValid">
 
-    <div  class="alert alert-danger alert-dismissible fade show" role="alert">
-      <strong>Validation!</strong>
-      S'il vous plaît remplir tous les champs obligatoires.
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+    <!-- <div  class="alert alert-danger alert-dismissible fade show" role="alert">
+       <strong>Validation</strong>
+       S'il vous plaît remplir tous les champs obligatoires.
+       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+     </div>-->
   </ng-container>
   <div class="accordion" id="accordionExample0">
     <div class="accordion-item">
@@ -51,9 +51,12 @@
 
                         </div>
                         <div class="form-group mb-4">
-                          <span class="input-group-text" >ICE: (*)</span>
-                          <input required type="number" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.ICE" >
-                          <small style="color:red;" *ngIf="submitte && !dmdReferencement.ICE">Le champ est obligatoire.</small>
+                          <span class="input-group-text">ICE: (*)</span>
+                          <input [(ngModel)]="dmdReferencement.ice" [ngModelOptions]="{standalone: true}" class="form-control"
+                                 required
+                                 type="text">
+                          <small *ngIf="submitte && !dmdReferencement.ice" style="color:red;">Le
+                            champ est obligatoire.</small>
 
                         </div>
                         <div class="form-group mb-4">
@@ -67,6 +70,8 @@
                           <span class="input-group-text pb-2" >Forme Juridique: (*)</span>
                           <input required type="file" class="form-control" (change)="onFileSelected(1, $event)">
                           <small style="color:red;" *ngIf="submitte && !selectedFiles[0]">Le fichier est obligatoire.</small>
+                          <small *ngIf="submitte && !isPdf(selectedFiles[0]) " style="color:red;">invalid
+                            pdf.</small>
 
                         </div>
                         <div class="form-group mb-4">
@@ -83,6 +88,8 @@
                           <span class="input-group-text" >Attestation de registre de commerce: (*)</span>
                           <input required type="file" class="form-control" (change)="onFileSelected(2, $event)">
                           <small style="color:red;" *ngIf="submitte && !selectedFiles[1]">Le fichier est obligatoire.</small>
+                          <small *ngIf="submitte && !isPdf(selectedFiles[1])" style="color:red;">invalid
+                            pdf.</small>
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >Date de création: (*)</span>
@@ -92,9 +99,14 @@
                       </div>
                       <div class="col-lg-4">
                         <div class="form-group mb-4">
-                          <span class="input-group-text pb-2" >Attestation de CNSS: (*)</span>
-                          <input required type="file" class="form-control"  (change)="onFileSelected(3, $event)">
-                          <small style="color:red;" *ngIf="submitte && !selectedFiles[2]">Le fichier est obligatoire.</small>
+                          <span class="input-group-text pb-2">Attestation de CNSS: (*)</span>
+                          <input (change)="onFileSelected(3, $event)" class="form-control" required
+                                 type="file">
+                          <small *ngIf="submitte && !selectedFiles[2]" style="color:red;">Le fichier
+                            est obligatoire.</small>
+                          <small *ngIf="submitte && !isPdf(selectedFiles[2]) " style="color:red;">invalid
+                            pdf.</small>
+
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >Date d'expiration d'attestation CNSS: (*)</span>
@@ -146,16 +158,20 @@
                       </div>
                       <div class="col-lg-4">
                         <div class="form-group mb-4">
-                          <span class="input-group-text pb-2" >Attestation Fiscale: (*)</span>
-                          <input type="file" class="form-control" (change)="onFileSelected(4, $event)">
-                          <small style="color:red;" *ngIf="submitte && !selectedFiles[3]">Le fichier est obligatoire.</small>
+                          <span class="input-group-text pb-2">Attestation Fiscale: (*)</span>
+                          <input (change)="onFileSelected(4, $event)" class="form-control"
+                                 type="file">
+                          <small *ngIf="submitte && !selectedFiles[3]" style="color:red;">Le fichier
+                            est obligatoire.</small>
+                          <small *ngIf="submitte && !isPdf(selectedFiles[3]) " style="color:red;">invalid
+                            pdf.</small>
+
                         </div>
                         <div class="form-group mb-4">
                           <span class="input-group-text" >Date d'expiration d'attestation Fiscale: (*)</span>
                           <input type="date" class="p-datepicker"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.dateExperationFiscale">
                           <small style="color:red;" *ngIf="submitte && !dmdReferencement.dateExperationFiscale">Le champ est obligatoire.</small>
                         </div>
-
                       </div>
                       <div class="col-lg-4">
                         <div class="form-group mb-4">
@@ -166,12 +182,16 @@
                         <div class="form-group mb-4">
                           <span class="input-group-text pb-2" >Attestation d'inscription à la taxe professionnelle: (*)</span>
                           <input type="file" class="form-control" (change)="onFileSelected(5, $event)">
-                          <small style="color:red;" *ngIf="submitte && !selectedFiles[4]">Le fichier est obligatoire.</small>
                         </div>
                         <div class="form-group mb-4">
-                          <span class="input-group-text pb-2" >Attestation présentation de société: (*)</span>
-                          <input type="file" class="form-control" (change)="onFileSelected(6, $event)">
-                          <small style="color:red;" *ngIf="submitte && !selectedFiles[5]">Le fichier est obligatoire.</small>
+                          <span class="input-group-text pb-2">Attestation présentation de société: (*)</span>
+                          <input (change)="onFileSelected(6, $event)" class="form-control"
+                                 type="file">
+                          <small *ngIf="submitte && !selectedFiles[5]" style="color:red;">Le fichier
+                            est obligatoire.</small>
+                          <small *ngIf="submitte && !isPdf(selectedFiles[5])" style="color:red;">invalid
+                            pdf.</small>
+
                         </div>
                       </div>
                     </div>
@@ -234,7 +254,6 @@
                           <div class="form-group mb-4">
                             <span class="input-group-text pb-2" >Cadre administratif :</span>
                             <input required type="file" class="form-control" (change)="onFileSelected(7, $event)">
-                            <small style="color:red;" *ngIf="submitte && !selectedFiles[6]">Le fichier est obligatoire.</small>
                           </div>
                           <div class="form-group mb-4">
                             <span class="input-group-text" >GSM: (*)</span>
@@ -257,7 +276,6 @@
                           <div class="form-group mb-4">
                             <span class="input-group-text" >Attestation de capacité financière:</span>
                             <input required type="file" class="form-control" (change)="onFileSelected(8, $event)">
-                            <small style="color:red;" *ngIf="submitte && !selectedFiles[7]">Le fichier est obligatoire.</small>
 
                           </div>
                         </div>
@@ -265,7 +283,6 @@
                           <div class="form-group mb-4">
                             <span class="input-group-text pb-2" >Attestation de chiffre d'affaire :</span>
                             <input required type="file" class="form-control"  (change)="onFileSelected(9, $event)">
-                            <small style="color:red;" *ngIf="submitte && !selectedFiles[8]">Le fichier est obligatoire.</small>
                           </div>
                           <div class="form-group mb-4">
                             <span class="input-group-text pb-2" >Date d'expiration CA: (*)</span>
@@ -285,7 +302,6 @@
                           <div class="form-group mb-4">
                             <span class="input-group-text pb-2" >Organigramme :</span>
                             <input required type="file" class="form-control"  (change)="onFileSelected(10, $event)">
-                            <small style="color:red;" *ngIf="submitte && !selectedFiles[9]">Le fichier est obligatoire.</small>
                           </div>
                         </div>
 
@@ -312,25 +328,34 @@
                             <input required type="file" class="form-control"  aria-describedby="basic-addon1" (change)="onFileSelected(11, $event)">
                           </div>
                           <div class="form-group mb-4">
-                            <span class="input-group-text" >Catalogue des produits :</span>
-                            <input required type="file" class="form-control"  aria-describedby="basic-addon1">
+                            <span class="input-group-text">Catalogue des produits :</span>
+                            <input (change)="onFileSelected(12, $event)" class="form-control" required
+                                   type="file">
+                            <small *ngIf="submitte && !selectedFiles[11]" style="color:red;">Le
+                              fichier est obligatoire.</small>
+                            <small *ngIf="submitte && !isPdf(selectedFiles[11]) "
+                                   style="color:red;">invalid
+                              pdf.</small>
                           </div>
                         </div>
 
                         <div class="col-lg-4">
                           <div class="form-group mb-4">
                             <span class="input-group-text pb-2" >Attestations des travaux exécutés :</span>
-                            <input required type="file" class="form-control" (change)="onFileSelected(12, $event)" >
+                            <input (change)="onFileSelected(13, $event)" class="form-control" required
+                                   type="file">
                           </div>
                           <div class="form-group mb-4">
                             <span class="input-group-text" >Certificats des produits </span>
-                            <input required type="file" class="form-control" (change)="onFileSelected(13, $event)">
+                            <input (change)="onFileSelected(14, $event)" class="form-control" required
+                                   type="file">
                           </div>
                         </div>
                         <div class="col-lg-4">
                           <div class="form-group mb-4">
                             <span class="input-group-text pb-2" >Moyens techniques :</span>
-                            <input required type="file" class="form-control"  (change)="onFileSelected(14, $event)">
+                            <input (change)="onFileSelected(15, $event)" class="form-control" required
+                                   type="file">
                           </div>
                         </div>
 
