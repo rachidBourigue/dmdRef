@@ -168,10 +168,23 @@
 
                         </div>
                         <div class="form-group mb-4">
-                          <span class="input-group-text" >Date d'expiration d'attestation Fiscale: (*)</span>
-                          <input type="date" class="p-datepicker"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="dmdReferencement.dateExperationFiscale">
-                          <small style="color:red;" *ngIf="submitte && !dmdReferencement.dateExperationFiscale">Le champ est obligatoire.</small>
+                          <span class="input-group-text">Date d'expiration d'attestation Fiscale: (*)</span>
+                          <input [(ngModel)]="dmdReferencement.dateExperationFiscale" [ngModelOptions]="{standalone: true}"
+                                 class="p-datepicker"
+                                 type="date">
+                          <small *ngIf="submitte && !dmdReferencement.dateExperationFiscale"
+                                 style="color:red;">Le
+                            champ est obligatoire.</small>
                         </div>
+                        <ng-container *ngIf="isFou()">
+                          <div class="form-group mb-4">
+                            <span class="input-group-text">Site internet</span>
+                            <input [(ngModel)]="dmdReferencement.site" [ngModelOptions]="{standalone: true}" class="form-control"
+                                   required
+                                   type="text">
+                          </div>
+                        </ng-container>
+
                       </div>
                       <div class="col-lg-4">
                         <div class="form-group mb-4">
@@ -364,12 +377,139 @@
                   </div>
 
                 </div>
-              </div><div class="container text-center">
+              </div>
+            </div>
+            <div class="accordion" id="accordionExample6">
+              <ng-container *ngIf="isFou()">
+                <div class="accordion-item  m-3">
+                  <h2 class="accordion-header">
+                    <button aria-controls="collapseOne" aria-expanded="true"
+                            class="accordion-button" data-bs-target="#collapseOne6" data-bs-toggle="collapse"
+                            style="background:#90191c;color:white" type="button">
+                      Domiciliation bancaire:
+                    </button>
+                  </h2>
+                  <div aria-labelledby="headingOne" class="accordion-collapse collapse show"
+                       data-bs-parent="#accordionExample3" id="collapseOne6">
+                    <div class="accordion-body">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="form-group mb-4">
+                              <span class="input-group-text pb-2">Banque </span>
+                              <input [(ngModel)]="dmdReferencement.banque" [ngModelOptions]="{standalone: true}"
+                                     class="form-control"
+                                     required
+                                     type="text"></div>
+                            <div class="form-group mb-4">
+                              <span class="input-group-text">RIB</span>
+                              <input [(ngModel)]="dmdReferencement.rib" [ngModelOptions]="{standalone: true}"
+                                     class="form-control"
+                                     required
+                                     type="text">
+
+
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group mb-4">
+                              <span class="input-group-text pb-2">Agence</span>
+                              <input [(ngModel)]="dmdReferencement.agence" [ngModelOptions]="{standalone: true}"
+                                     class="form-control"
+                                     required
+                                     type="text">
+                            </div>
+                            <div class="form-group mb-4">
+                              <span class="input-group-text">Ville</span>
+                              <input [(ngModel)]="dmdReferencement.ville" [ngModelOptions]="{standalone: true}"
+                                     class="form-control"
+                                     required
+                                     type="text">
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="accordion-item  m-3">
+                  <h2 class="accordion-header">
+                    <button aria-controls="collapseOne" aria-expanded="true"
+                            class="accordion-button" data-bs-target="#collapseOne7" data-bs-toggle="collapse"
+                            style="background:#90191c;color:white" type="button">
+                      Interlocuteur:
+                    </button>
+                  </h2>
+                  <div aria-labelledby="headingOne" class="accordion-collapse collapse show"
+                       data-bs-parent="#accordionExample3" id="collapseOne7">
+                    <div class="accordion-body">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="form-group mb-4">
+                              <span class="input-group-text pb-2">Direction général</span>
+                              <input [(ngModel)]="dmdReferencement.dgnom" [ngModelOptions]="{standalone: true}" class="form-control"
+                                     placeholder="nom"
+                                     required
+                                     type="text">
+                              <input [(ngModel)]="dmdReferencement.dgprenom" [ngModelOptions]="{standalone: true}"
+                                     class="form-control"
+                                     placeholder="prenom"
+                                     required
+                                     type="text">
+                              <input [(ngModel)]="dmdReferencement.dgemail" [ngModelOptions]="{standalone: true}"
+                                     class="form-control"
+                                     placeholder="Email"
+                                     required
+                                     type="text">
+                              <input [(ngModel)]="dmdReferencement.dgtel" [ngModelOptions]="{standalone: true}" class="form-control"
+                                     placeholder="Tel"
+                                     required
+                                     type="text">
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group mb-4">
+                              <span class="input-group-text pb-2">Direction commerciale</span>
+                              <input [(ngModel)]="dmdReferencement.dcnom" [ngModelOptions]="{standalone: true}" class="form-control"
+                                     placeholder="nom"
+                                     required
+                                     type="text">
+                              <input [(ngModel)]="dmdReferencement.dcprenom" [ngModelOptions]="{standalone: true}"
+                                     class="form-control"
+                                     placeholder="prenom"
+                                     required
+                                     type="text">
+                              <input [(ngModel)]="dmdReferencement.dcemail" [ngModelOptions]="{standalone: true}"
+                                     class="form-control"
+                                     placeholder="Email"
+                                     required
+                                     type="text">
+                              <input [(ngModel)]="dmdReferencement.dctel" [ngModelOptions]="{standalone: true}" class="form-control"
+                                     placeholder="Tel"
+                                     required
+                                     type="text"></div>
+                          </div>
+
+
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </ng-container>
+              <div class="container text-center">
                 <div class="justify-content-center align-content-center ">
-                  <button (click)="save()" type="submit" class="btn p-3 mb-4" style="background:#90191c;color:white;">Envoyer la demande</button>
+                  <button (click)="save()" class="btn p-3 mb-4" style="background:#90191c;color:white;"
+                          type="submit">Envoyer la demande
+                  </button>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
 

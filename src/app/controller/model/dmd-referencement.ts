@@ -42,7 +42,20 @@ export interface DmdReferencement {
   typeDmndRef?: string;
   dateExperationFiscale?: Date;
   dateExperationCNSS?: Date;
-  dateExperationChiffreAffaires?:Date;
-
+  dateExperationChiffreAffaires?: Date;
+  dateExperationrRegistreDeCommerce?: Date;
+  banque?: string;
+  rib?: string;
+  agence?: string;
+  ville?: string;
+  site?: string;
+  dgnom?: string;
+  dgprenom?: string;
+  dgemail?: string;
+  dgtel?: string;
+  dcnom?: string;
+  dcprenom?: string;
+  dcemail?: string;
+  dctel?: string;
 
 }

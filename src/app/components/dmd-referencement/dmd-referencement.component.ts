@@ -27,8 +27,9 @@ export class DmdReferencementComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.dmdReferencement.typeDmndRef = params['type'];
-      this. getAllLots(this.dmdReferencement.typeDmndRef);
+      this.getAllLots(this.dmdReferencement.typeDmndRef);
     });
+    console.log(this.dmdReferencement.typeDmndRef == 'FOU')
 
   }
 
@@ -96,7 +97,7 @@ export class DmdReferencementComponent implements OnInit {
       } else if (index == 1) {
         this.serviceDmd.uploadFile(this.selectedFiles[1], idDmd, "9", "");
       } else if (index == 2) {
-        this.serviceDmd.uploadFile(this.selectedFiles[2], idDmd, "6", this.dmdReferencement.dateExperationCNSS);
+        this.serviceDmd.uploadFile(this.selectedFiles[2], idDmd, "6", "");
       } else if (index == 3) {
         this.serviceDmd.uploadFile(this.selectedFiles[3], idDmd, "8", this.dmdReferencement.dateExperationFiscale);
       } else if (index == 4) {
@@ -207,11 +208,17 @@ export class DmdReferencementComponent implements OnInit {
     // Test the email against the regex pattern
     return emailRegex.test(email);
   }
+
   showSuccess() {
     this.toastr.success('votre demande de referencement a été modifié envoyé!', '');
   }
+
   showError() {
     this.toastr.error('S\'il vous plaît remplir tous les champs obligatoires.!', 'Error de validation');
+  }
+
+  isFou(): boolean {
+    return this.dmdReferencement.typeDmndRef == 'FOU';
   }
 }
 
