@@ -54,15 +54,18 @@ export class DmdReferencementComponent implements OnInit {
     if(this.isDmdReferencementValid(this.dmdReferencement)){
       console.log(this.dmdReferencement.dateExperationCNSS);
       console.log(this.year1input);
+      this.dmdReferencement.validationDirecteur = false;
+      this.dmdReferencement.validationComite = false;
+      this.dmdReferencement.validationAssistant = false;
       this.setcaLastYears();
-     this.serviceDmd.addDmdRef(this.dmdReferencement).subscribe(
-       value => {
-         console.log("was send it ", value);
-         this.addFile(value);
-         this.showSuccess();
-       },
-       error => {
-         console.log("was not send it ", error);
+      this.serviceDmd.addDmdRef(this.dmdReferencement).subscribe(
+        value => {
+          console.log("was send it ", value);
+          this.addFile(value);
+          this.showSuccess();
+        },
+        error => {
+          console.log("was not send it ", error);
 
        },
      );
