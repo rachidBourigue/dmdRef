@@ -218,7 +218,7 @@ export class DmdReferencementComponent implements OnInit {
   }
 
   isFou(): boolean {
-    return this.dmdReferencement.typeDmndRef == 'FOU';
+    return this.dmdReferencement.typeDmndRef == 'Fou';
   }
 }
 

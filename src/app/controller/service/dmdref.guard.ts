@@ -10,7 +10,7 @@ export class TypeParameterGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const type = route.paramMap.get('type');
 
-    return (type == "SST") || (type == "FOU");
+    return (type == "Sst") || (type == "Fou");
 
     // Allow access to the route
   }
